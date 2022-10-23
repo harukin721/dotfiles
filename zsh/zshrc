@@ -1,0 +1,118 @@
+# ----------------------------
+# Completion
+# ----------------------------
+fpath=(${HOME}/.zsh/completions ${fpath})
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+FPATH=/opt/homebrew/share/zsh-completions:$FPATH
+FPATH=/opt/homebrew/share/zsh/site-functions:$FPATH
+autoload -Uz compinit
+compinit
+
+# ----------------------------
+# Locale
+# ----------------------------
+export LANG=ja_JP.UTF-8
+export LESSCHARSET=utf-8
+
+# ----------------------------
+# History
+# ----------------------------
+HISTFILE=~/.zsh_history
+HISTSIZE=100000
+SAVEHIST=100000
+# 空白を詰める
+setopt hist_reduce_blanks
+# ヒストリの保存時にコマンドの先頭の空白を無視
+setopt hist_ignore_space
+# 直前のコマンドの重複を削除
+setopt hist_ignore_dups
+# 同じコマンドをヒストリに残さない
+setopt hist_ignore_all_dups
+# 同時に起動したzshの間でヒストリを共有
+setopt share_history
+# ヒストリの保存時にコマンドを追加
+setopt inc_append_history
+# ビープ音を鳴らさない
+setopt no_beep
+
+# ----------------------------
+# Directory behavior
+# ----------------------------
+DIRSTACKSIZE=100
+setopt AUTO_PUSHD
+function chpwd() { ls }
+
+# ----------------------------
+# peco history search
+# ----------------------------
+function peco-select-history() {
+    local tac
+    if command -v tac > /dev/null; then
+        tac="tac"
+    else
+        tac="tail -r"
+    fi
+    BUFFER=$(\history -n 1 | eval $tac | peco --query "$LBUFFER")
+    CURSOR=$#BUFFER
+    zle reset-prompt
+}
+
+zle -N peco-select-history
+bindkey '^r' peco-select-history
+
+#=============================
+# alias
+#=============================
+alias gcd='cd $(ghq list --full-path --exact| peco)' # ghq
+alias vi='nvim'
+alias vim='nvim'
+alias g='git'
+alias d='docker'
+alias dc='docker compose'
+alias k='kubectl'
+alias t='terraform'
+
+# ----------------------------
+# SDKs / Languages（言語環境）
+# ----------------------------
+# Java（sdkman）
+# Java や Maven / Gradle のバージョン管理
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+# MySQL client（Homebrew）
+export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
+
+# Python（pyenv）
+# Python のバージョン管理
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+# Node.js（anyenv）
+# node / deno / bun などのバージョン管理
+# eval "$(anyenv init -)"
+
+# volta
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
+# ----------------------------
+# gcloud（Google Cloud SDK）
+# ----------------------------
+# gcloud コマンドの PATH 設定
+if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then
+  source "$HOME/google-cloud-sdk/path.zsh.inc"
+fi
+
+# gcloud の補完を有効化
+if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then
+  source "$HOME/google-cloud-sdk/completion.zsh.inc"
+fi
+
+# ----------------------------
+# Starship
+# ----------------------------
+eval "$(starship init zsh)"
+
+export PATH="$HOME/.local/bin:$PATH"
