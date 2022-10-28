@@ -102,7 +102,7 @@ PROMPT='
 #=============================
 # alias
 #=============================
-alias g='cd $(ghq list --full-path --exact| peco)' # ghq
+alias gcd='cd $(ghq list --full-path --exact| peco)' # ghq
 
 alias vi='nvim'
 alias vim='nvim'
@@ -120,13 +120,10 @@ alias tf='terraform'
 alias so='source'
 alias mkdir='mkdir -p'
 
-alias gb='git branch'
-alias gd='git diff'
-alias gst='git status'
-alias gco='git checkout'
-alias gl='git log'
-alias ga='git add'
-alias gcm='git commit -m'
+alias g='git'
+alias br='branch'
+alias st='status'
+alias co='git checkout'
 
 alias be='bundle exec'
 alias bi='bundle install --path vendor/bundler'
