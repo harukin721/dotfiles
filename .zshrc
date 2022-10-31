@@ -121,9 +121,6 @@ alias so='source'
 alias mkdir='mkdir -p'
 
 alias g='git'
-alias br='branch'
-alias st='status'
-alias co='git checkout'
 
 alias be='bundle exec'
 alias bi='bundle install --path vendor/bundler'
