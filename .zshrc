@@ -2,6 +2,7 @@
 export LANG=ja_JP.UTF-8
 export LESSCHARSET=utf-8
 
+
 # ヒストリの設定
 HISTFILE=~/.zsh_history
 HISTSIZE=50000
@@ -98,7 +99,6 @@ PROMPT='
 [%B%F{red}%n@%m%f%b:%F{green}%~%f]%F{cyan}$vcs_info_msg_0_%f
 %F{yellow}$%f '
 
-
 #=============================
 # alias
 #=============================
@@ -106,12 +106,6 @@ alias gcd='cd $(ghq list --full-path --exact| peco)' # ghq
 
 alias vi='nvim'
 alias vim='nvim'
-
-alias ls='ls -G'
-alias ll='ls -l'
-alias l='ls -la'
-alias so='source'
-alias mkdir='mkdir -p'
 
 alias dc='docker compose'
 alias k='kubectl'
@@ -126,3 +120,10 @@ alias be='bundle exec'
 alias bi='bundle install --path vendor/bundler'
 alias re='rbenv exec'
 alias rv='rbenv versions'
+
+# krew
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
+# ssh
+ssh-add /Users/harukin/.ssh/id_rsa
+ssh-add /Users/harukin/.ssh/id_rsa_pb-deployer
