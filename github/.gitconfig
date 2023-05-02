@@ -1,0 +1,10 @@
+[user]
+	email = 
+	name = harukin721
+[alias]
+	st = status
+	br = branch
+	co = checkout
+	cob = checkout -b
+	com = commit
+
