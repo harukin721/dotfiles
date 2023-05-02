@@ -2,7 +2,6 @@
 export LANG=ja_JP.UTF-8
 export LESSCHARSET=utf-8
 
-
 # ヒストリの設定
 HISTFILE=~/.zsh_history
 HISTSIZE=50000
@@ -109,19 +108,14 @@ alias gcd='cd $(ghq list --full-path --exact| peco)' # ghq
 alias vi='nvim'
 alias vim='nvim'
 
-alias dc='docker compose'
-alias k='kubectl'
-alias tf='terraform'
-
-alias so='source'
+alias rm='rm -i'
 alias mkdir='mkdir -p'
 
 alias g='git'
-
-alias be='bundle exec'
-alias bi='bundle install --path vendor/bundler'
-alias re='rbenv exec'
-alias rv='rbenv versions'
+alias d='docker'
+alias dc='docker compose'
+alias k='kubectl'
+alias tf='terraform'
 
 # krew
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
@@ -129,3 +123,4 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 # ssh
 ssh-add /Users/harukin/.ssh/id_rsa
 ssh-add /Users/harukin/.ssh/id_rsa_pb-deployer
+ssh-add /Users/harukin/.ssh/harukin.pem
