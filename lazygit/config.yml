@@ -1,0 +1,13 @@
+customCommands:
+  - key: "<c-g>"
+    context: "files"
+    description: "AI commit message"
+    prompts:
+      - type: "menuFromCommand"
+        title: "AI Commit Message"
+        key: "Msg"
+        command: "bash -c 'git diff --cached | claude -p \"この git diff に対する簡潔なコミットメッセージを日本語で5つ提案してください。各メッセージは1行ずつ、番号付きで出力してください。絵文字は使わないでください。それ以外は何も出力しないでください。\"'"
+        filter: '^\d+[\.\)]\s*(?P<msg>.+)$'
+        valueFormat: "{{ .msg }}"
+        labelFormat: "{{ .msg | green }}"
+    command: 'git commit -m "{{.Form.Msg}}"'
