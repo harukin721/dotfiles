@@ -1,0 +1,6 @@
+[user]
+    name  = harukin721
+    email = h.ueji.43@gmail.com
+
+[includeIf "gitdir:~/ghq/github.com/hoge/"]
+    path = ~/.gitconfig-hoge
